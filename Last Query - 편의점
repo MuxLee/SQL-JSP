@@ -1,0 +1,2 @@
+String store_nm = request.getParameter("store_nm");
+SELECT decode(c.sale_fg, '1', '판매', '2', '판매취소'), c.sale_no, to_char(c.sale_ymd, 'yyyy-MM-dd'), a.goods_nm, c.sale_cnt, sum(c.sale_cnt*a.goods_price), decode(c.pay_type, '01', '현금', '02', '카드') from goods_tbl_003 a, store_tbl_003 b, sale_tbl_003 c  where a.goods_cd = c.goods_cd  AND b.store_cd = c.store_cd  AND b.store_nm = '"+store_nm+"' group by c.sale_fg, c.sale_no, c.sale_ymd, a.goods_nm, c.sale_cnt, c.PAY_TYPE
