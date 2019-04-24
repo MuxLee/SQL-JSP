@@ -1,18 +1,46 @@
-insert into member_tbl_001 values(100001, '±èÀ¯Á¤', '010-1111-2222', '¼­¿ï ¿ë»ê±¸', '20180501', '0');
-insert into member_tbl_001 values(100002, '±èÀ±°æ', '010-2222-3333', '¼­¿ï µ¿ÀÛ±¸', '20180822', '0');
-insert into member_tbl_001 values(100003, 'ÃÖ½ÂÇÊ', '010-3333-4444', '¼­¿ï °­³²±¸', '20180913', '1');
-insert into member_tbl_001 values(100004, '°­ÁöÇö', '010-4444-5555', '¼­¿ï ¼ÛÆÄ±¸', '20181107', '1');
-insert into member_tbl_001 values(100005, 'ÀÌ¿ø¼®', '010-5555-6666', '¼­¿ï ¼ºµ¿±¸', '20180108', '0');
-insert into member_tbl_001 values(100006, '±è½ÂÇö', '010-6666-7777', '¼­¿ï ±¤Áø±¸', '20190117', '0');
-insert into member_tbl_001 values(100007, 'ÀÌ¿¹Âù', '010-7777-8888', '¼­¿ï ±İÃµ±¸', '20190325', '1');
-insert into member_tbl_001 values(100008, '°í½Â¿ø', '010-8888-9999', '¼­¿ï ±¸·Î±¸', '20180324', '0');
+create table member_tbl_001 (
+    cust_no number(6) not null,
+    cust_name varchar2(20) not null,
+    phone varchar2(13) not null,
+    address varchar2(60),
+    join_date date,
+    stat_fg varchar2(2),
+    primary key(cust_no)
+);
 
-insert into book_tbl_001 values('A0001', '¾ğ¾îÀÇ ¿Âµµ', 'A', 'ÀÌ±âÁÖ', '20180501', '1');
-insert into book_tbl_001 values('A0002', '°ñµç¾Æ¿ö', 'A', 'ÀÌ±¹Á¾', '20180501', '1');
-insert into book_tbl_001 values('B0001', '12°¡Áö ÀÎ»ıÀÇ ¹ıÄ¢', 'B', 'ÇÇÅÍ½¼', '20180601', '1');
-insert into book_tbl_001 values('B0002', '´ç½ÅÀÌ ¿Ç´Ù', 'B', 'Á¤Çı½Å', '20180601', '0');
-insert into book_tbl_001 values('C0001', '¸¶·ÂÀÇ ÅÂµî', 'C', '¾çÀ±¿Á', '20180901', '1');
-insert into book_tbl_001 values('C0002', '²ÉÀ» º¸µí ³Ê¸¦ º»´Ù', 'C', '³ªÅÂÁÖ', '20180901', '1');
+create table book_tbl_001 (
+    book_code varchar2(10) not null,
+    book_name varchar2(50) not null,
+    book_type varchar2(2),
+    book_author varchar2(20),
+    in_date date,
+    
+create table rental_tbl_001 (
+    rent_ymd varchar2(8) not null,
+    rent_no varchar2(5) not null,
+    rent_book varchar2(10) not null,
+    rent_rent number(6) not null,
+    close_ymd varchar2(8),
+    return_ymd varchar2(8),
+    return_fg varchar2(2),
+    primary key(rent_ymd, rent_no)
+);
+
+insert into member_tbl_001 values(100001, 'ê¹€ìœ ì •', '010-1111-2222', 'ì„œìš¸ ìš©ì‚°êµ¬', '20180501', '0');
+insert into member_tbl_001 values(100002, 'ê¹€ìœ¤ê²½', '010-2222-3333', 'ì„œìš¸ ë™ì‘êµ¬', '20180822', '0');
+insert into member_tbl_001 values(100003, 'ìµœìŠ¹í•„', '010-3333-4444', 'ì„œìš¸ ê°•ë‚¨êµ¬', '20180913', '1');
+insert into member_tbl_001 values(100004, 'ê°•ì§€í˜„', '010-4444-5555', 'ì„œìš¸ ì†¡íŒŒêµ¬', '20181107', '1');
+insert into member_tbl_001 values(100005, 'ì´ì›ì„', '010-5555-6666', 'ì„œìš¸ ì„±ë™êµ¬', '20180108', '0');
+insert into member_tbl_001 values(100006, 'ê¹€ìŠ¹í˜„', '010-6666-7777', 'ì„œìš¸ ê´‘ì§„êµ¬', '20190117', '0');
+insert into member_tbl_001 values(100007, 'ì´ì˜ˆì°¬', '010-7777-8888', 'ì„œìš¸ ê¸ˆì²œêµ¬', '20190325', '1');
+insert into member_tbl_001 values(100008, 'ê³ ìŠ¹ì›', '010-8888-9999', 'ì„œìš¸ êµ¬ë¡œêµ¬', '20180324', '0');
+
+insert into book_tbl_001 values('A0001', 'ì–¸ì–´ì˜ ì˜¨ë„', 'A', 'ì´ê¸°ì£¼', '20180501', '1');
+insert into book_tbl_001 values('A0002', 'ê³¨ë“ ì•„ì›Œ', 'A', 'ì´êµ­ì¢…', '20180501', '1');
+insert into book_tbl_001 values('B0001', '12ê°€ì§€ ì¸ìƒì˜ ë²•ì¹™', 'B', 'í”¼í„°ìŠ¨', '20180601', '1');
+insert into book_tbl_001 values('B0002', 'ë‹¹ì‹ ì´ ì˜³ë‹¤', 'B', 'ì •í˜œì‹ ', '20180601', '0');
+insert into book_tbl_001 values('C0001', 'ë§ˆë ¥ì˜ íƒœë“±', 'C', 'ì–‘ìœ¤ì˜¥', '20180901', '1');
+insert into book_tbl_001 values('C0002', 'ê½ƒì„ ë³´ë“¯ ë„ˆë¥¼ ë³¸ë‹¤', 'C', 'ë‚˜íƒœì£¼', '20180901', '1');
 
 insert into rental_tbl_001 values('20190318', '00001', 'A0001', 100001, '20190325', '', '0');
 insert into rental_tbl_001 values('20190318', '00002', 'B0001', 100001, '20190325', '', '0');
@@ -20,3 +48,5 @@ insert into rental_tbl_001 values('20190318', '00003', 'C0001', 100001, '2019032
 insert into rental_tbl_001 values('20190320', '00001', 'B0002', 100005, '20190327', '20190324', '1');
 insert into rental_tbl_001 values('20190322', '00001', 'A0002', 100006, '20190329', '', '0');
 insert into rental_tbl_001 values('20190323', '00001', 'C0002', 100003, '20190330', '', '0');
+
+select c.rent_ymd, c.rent_no, c.rent_book, b.book_name, a.cust_no, a.cust_name, c.close_ymd from rental_tbl_001 c, book_tbl_001 b, member_tbl_001 a where a.cust_no = c.rent_rent and b.book_code = c.rent_book and b.stat_fg = '1';
