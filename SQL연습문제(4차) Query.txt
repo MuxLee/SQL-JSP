@@ -1,64 +1,79 @@
-create table goods_tbl_003 (
-	goods_cd varchar2(6) not null primary key,
-	goods_nm varchar2(30),
-	goods_price number(8),
-	cost number(8),
-	in_date date
+create table menu_tbl_007 (
+	menu_cd varchar2(5) not null primary key,
+	menu_nm varchar2(30),
+	price number(8),
+	menu_fg varchar(1)
 );
 
-grant select, insert, update, delete on goods_tbl_003 to system;
+grant select, insert, update, delete on menu_tbl_007 to system;
 
-insert into goods_tbl_003 values('110001', '라면', 1050, 750, '20190302');
-insert into goods_tbl_003 values('110002', '빵', 1300, 800, '20190302');
-insert into goods_tbl_003 values('110003', '과자', 2000, 1700, '20190302');
-insert into goods_tbl_003 values('110004', '탄산음료', 900, 750, '20190302');
-insert into goods_tbl_003 values('110005', '삼각김밥', 750, 300, '20190302');
-insert into goods_tbl_003 values('110006', '초콜릿', 1500, 1300, '20190302');
-insert into goods_tbl_003 values('110007', '우유', 850, 600, '20190302');
+insert into menu_tbl_007 values('10001', '아메리카노', 3600, '0');
+insert into menu_tbl_007 values('10002', '카페 라떼', 4100, '0');
+insert into menu_tbl_007 values('10003', '카페 모카', 4600, '0');
+insert into menu_tbl_007 values('10004', '카라멜 마키아또', 5100, '0');
+insert into menu_tbl_007 values('10005', '호지 티 라떼', 5400, '1');
+insert into menu_tbl_007 values('10006', '그린 티 라떼', 5400, '1');
+insert into menu_tbl_007 values('10007', '차이 티 라떼', 4600, '1');
 
-create table store_tbl_003 (
-	store_cd varchar2(5) not null primary key,
+create table size_tbl_007 (
+	size_cd varchar2(2) not null primary key,
+	size_nm varchar2(20),
+	plus_price varchar2(4)
+);
+
+grant select, insert, update, delete on size_tbl_007 to system;
+
+insert into size_tbl_007 values('S1', 'short', '0');
+insert into size_tbl_007 values('T1', 'tall', '500');
+insert into size_tbl_007 values('G1', 'grande', '1000');
+insert into size_tbl_007 values('V1', 'venti', '1500');
+
+create table store_tbl_007 (
+	store_cd varchar2(4) not null primary key,
 	store_nm varchar2(20),
-	store_fg varchar2(1)
+	store_loc varchar2(2),
+	open_date date
 );
 
-gratn select, insert, update, delete on store_tbl_003 to system;
+grant select, insert, update, delete on store_tbl_007 to system;
 
-insert into store_tbl_003 values('A001', '이태원점', '0');
-insert into store_tbl_003 values('A002', '한남점', '0');
-insert into store_tbl_003 values('A003', '도원점', '0');
-insert into store_tbl_003 values('B001', '혜화점', '1');
-insert into store_tbl_003 values('C001', '방배점', '1');
-insert into store_tbl_003 values('D001', '사당점', '0');
-insert into store_tbl_003 values('D002', '흑석점', '1');
-insert into store_tbl_003 values('E001', '금호점', '0');
+insert into store_tbl_007 values('A001', '동부이촌동점', '0', '20181001');
+insert into store_tbl_007 values('A002', '이태원점', '0', '20181101');
+insert into store_tbl_007 values('A003', '서울타워점', '0', '20181201');
+insert into store_tbl_007 values('B004', '소공동점', '1', '20190101');
+insert into store_tbl_007 values('B005', '명동길점', '1', '20190201');
+insert into store_tbl_007 values('B006', '충무로역점', '1', '20190301');
 
-create table sale_tbl_003 (
-	sale_no varchar2(4) not null primary key,
-	slae_ymd date not null,
-	sale_fg varchar2(1) not null,
-	store_cd varchar2(5),
-	goods_cd varchar2(6),
+create table sale_tbl_007 (
+	sale_ymd varchar2(8) not null,
+	sale_no varchar(4) not null,
+	store_cd varchar2(4),
+	menu_cd varchar2(5),
+	size_cd varchar2(2),
 	sale_cnt number(3),
 	pay_type varchar2(2),
-	foreign key(store_cd) references store_tbl_003(store_cd),
-	foreign key(goods_cd) references goods_tbl_003(goods_cd)
+	primary key (sale_ymd, sale_no),
+	foreign key(store_cd) references store_tbl_007(store_cd),
+	foreign key(menu_cd) references menu_tbl_007(menu_cd),
+	foreign key(size_cd) references size_tbl_007(size_cd)
 );
 
-grant select, insert, update, delete on sale_tbl_003 to system;
+grant select, insert, update, delete on sale_tbl_007 to system;
 
-insert into sale_tbl_003 values('0001', '20190325', '1', 'A001', '110001', 2, '02');
-insert into sale_tbl_003 values('0002', '20190325', '1', 'B001', '110003', 2, '02');
-insert into sale_tbl_003 values('0003', '20190325', '1', 'D001', '110003', 1, '01');
-insert into sale_tbl_003 values('0004', '20190325', '1', 'A001', '110006', 5, '02');
-insert into sale_tbl_003 values('0005', '20190325', '1', 'C001', '110003', 2, '02');
-insert into sale_tbl_003 values('0006', '20190325', '2', 'C001', '110003', 2, '02');
-insert into sale_tbl_003 values('0007', '20190325', '1', 'A002', '110005', 4, '02');
-insert into sale_tbl_003 values('0008', '20190325', '1', 'A003', '110004', 4, '02');
-insert into sale_tbl_003 values('0009', '20190325', '1', 'B001', '110001', 2, '01');
-insert into sale_tbl_003 values('0010', '20190325', '1', 'A002', '110006', 1, '02');
+insert into sale_tbl_007 values('20190429', '0001', 'A001', '10001', 'T1', 4, '02');
+insert into sale_tbl_007 values('20190429', '0002', 'B004', '10002', 'S1', 1, '02');
+insert into sale_tbl_007 values('20190429', '0003', 'B004', '10006', 'S1', 1, '02');
+insert into sale_tbl_007 values('20190429', '0004', 'A002', '10006', 'T1', 1, '01');
+insert into sale_tbl_007 values('20190429', '0005', 'B005', '10001', 'G1', 1, '01');
+insert into sale_tbl_007 values('20190429', '0006', 'B005', '10003', 'S1', 2, '02');
+insert into sale_tbl_007 values('20190429', '0007', 'A003', '10002', 'T1', 3, '02');
+insert into sale_tbl_007 values('20190429', '0008', 'B006', '10001', 'S1', 4, '02');
 
+create sequence sale_seq
+start with 0001
+minvalue 0001
+increment by 1
+nocache
+nocycle;
 
-select b.store_nm, sum(decode(c.pay_type, '01', a.goods_price*c.sale_cnt, '0')) as cash, sum(decode(c.pay_type, '02', decode(c.sale_fg, '1', '1', '2', '-1')*a.goods_price*c.sale_cnt, '0')) as card, sum(decode(c.pay_type, '01', a.goods_price*c.sale_cnt, '0')+decode(c.pay_type, '02', decode(c.sale_fg, '1', '1', '2', '-1')*a.goods_price*c.sale_cnt, '0')) as total from goods_tbl_003 a, store_tbl_003 b, sale_tbl_003 c where a.goods_cd = c.goods_cd and b.store_cd = c.store_cd group by b.store_nm order by total desc;
-
-select money from (select decode(c.pay_type, '01', '999,999,999, '0') as money from goods_tbl_003 a, sale_tbl_003 c where a.goods_cd = c.goods_cd and c.pay_type = '01');
+grant alter, select on sale_seq to system;
