@@ -9,11 +9,13 @@ create table member_tbl_001 (
 );
 
 create table book_tbl_001 (
-    book_code varchar2(10) not null,
+    book_code varchar2(10) not null primary key,
     book_name varchar2(50) not null,
     book_type varchar2(2),
     book_author varchar2(20),
     in_date date,
+    stat_fg varchar(2)
+);
     
 create table rental_tbl_001 (
     rent_ymd varchar2(8) not null,
